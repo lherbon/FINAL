@@ -8,3 +8,4 @@ Dejo acá asentado el trabajo, con las instrucciones de cómo ejecutarlo:
 3. Correr el CD:  cd blog_project
 4. Correr el servidor: py manage.py runserver
 
+Este es el link al video de demostración del funcionamiento de la página: https://youtu.be/gKpkb9OpqCg?si=YjmOqZopniQ0GaIN
