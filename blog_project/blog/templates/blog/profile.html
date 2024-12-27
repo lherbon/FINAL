@@ -1,0 +1,27 @@
+<!-- blog/profile.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Perfil de {{ user.username }}</h1>
+  
+  <!-- Datos del usuario -->
+  <p>Email: {{ user.email }}</p>
+  <p>Nombre completo: {{ user.first_name }} {{ user.last_name }}</p>
+  <p>Fecha de registro: {{ user.date_joined }}</p>
+
+  <h2>Editar Perfil</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar cambios</button>
+  </form>
+
+  <h2>Eliminar Cuenta</h2>
+  <form method="POST" action="{% url 'delete_account' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar mi cuenta</button>
+  </form>
+
+  <br>
+  <a href="{% url 'logout' %}">Cerrar sesión</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <p>Publicado el {{ post.created_at }} por {{ post.author.username }}</p>
+  
+  <!-- Mostrar la imagen si existe -->
+  {% if post.image %}
+    <img src="{{ post.image.url }}" alt="Imagen del post" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+  {% endif %}
+  
+  <p>{{ post.content }}</p>
+  <a href="{% url 'index' %}">Volver al índice</a>
+  
+  <!-- Botones para editar y eliminar solo si el usuario es el autor -->
+  {% if request.user == post.author or request.user.is_superuser %}
+    <div style="margin-top: 20px;">
+      <a href="{% url 'edit_post' post.id %}" style="background-color: blue; color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px;">Editar</a>
+      <form method="POST" action="{% url 'delete_post' post.id %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" style="background-color: red; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">Eliminar</button>
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}
